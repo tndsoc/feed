@@ -18,6 +18,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Copy newfile to index.html
+        run: |
+          if [ -f "newfile" ]; then
+            cp newfile index.html
+          fi
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
