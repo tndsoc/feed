@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Deploy Feed to GitHub Pages
 
 on:
   push:
@@ -19,18 +19,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Copy newfile to index.html
+      - name: Copy newfile to feed.txt
         run: |
           if [ -f "newfile" ]; then
-            cp newfile index.html
+            cp newfile feed.txt
+          else
+            echo "Error: newfile not found!" >&2
+            exit 1
           fi
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: '.'
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
